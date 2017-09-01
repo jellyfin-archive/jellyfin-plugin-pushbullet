@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.3;</TargetFrameworks>
+    <AssemblyVersion>1.1.0.12</AssemblyVersion>
+    <FileVersion>1.1.0.12</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Configuration\config.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Configuration\config.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="mediabrowser.server.core" Version="3.3.0-beta" />
+  </ItemGroup>
+
+</Project>
