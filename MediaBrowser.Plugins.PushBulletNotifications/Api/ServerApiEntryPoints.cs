@@ -9,6 +9,8 @@ using MediaBrowser.Controller.Net;
 using MediaBrowser.Model.Logging;
 using MediaBrowser.Model.Services;
 using MediaBrowser.Plugins.PushBulletNotifications.Configuration;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MediaBrowser.Plugins.PushBulletNotifications.Api
 {
@@ -35,7 +37,13 @@ namespace MediaBrowser.Plugins.PushBulletNotifications.Api
                 .FirstOrDefault(i => string.Equals(i.MediaBrowserUserId, userID, StringComparison.OrdinalIgnoreCase));
         }
 
-        public object Post(TestNotification request)
+        public void Post(TestNotification request)
+        {
+            var task = PostAsync(request);
+            Task.WaitAll(task);
+        }
+
+        public async Task PostAsync(TestNotification request)
         {
             var options = GetOptions(request.UserID);
 
@@ -47,17 +55,22 @@ namespace MediaBrowser.Plugins.PushBulletNotifications.Api
             };
 
             var _httpRequest = new HttpRequestOptions();
-            
+
             //Create Basic HTTP Auth Header...
 
             string authInfo = options.Token;
             authInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(authInfo));
-            
-           _httpRequest.RequestHeaders["Authorization"] = "Basic " + authInfo;
 
-           _httpRequest.Url = "https://api.pushbullet.com/v2/pushes";
+            _httpRequest.RequestHeaders["Authorization"] = "Basic " + authInfo;
 
-            return _httpClient.Post(_httpRequest, parameters);
+            _httpRequest.Url = "https://api.pushbullet.com/v2/pushes";
+
+            _httpRequest.SetPostData(parameters);
+
+            using (await _httpClient.Post(_httpRequest).ConfigureAwait(false))
+            {
+
+            }
         }
     }
 }

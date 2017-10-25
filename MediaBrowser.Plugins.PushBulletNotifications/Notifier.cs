@@ -41,7 +41,7 @@ namespace MediaBrowser.Plugins.PushBulletNotifications
             get { return Plugin.Instance.Name; }
         }
 
-        public Task SendNotification(UserNotification request, CancellationToken cancellationToken)
+        public async Task SendNotification(UserNotification request, CancellationToken cancellationToken)
         {
             var options = GetOptions(request.User);
 
@@ -62,7 +62,12 @@ namespace MediaBrowser.Plugins.PushBulletNotifications
 
             _httpRequest.Url = "https://api.pushbullet.com/v2/pushes";
 
-            return _httpClient.Post(_httpRequest, parameters);
+            _httpRequest.SetPostData(parameters);
+
+            using (await _httpClient.Post(_httpRequest).ConfigureAwait(false))
+            {
+
+            }
         }
 
         private bool IsValid(PushBulletOptions options)
