@@ -5,6 +5,8 @@ using MediaBrowser.Common.Plugins;
 using MediaBrowser.Model.Plugins;
 using MediaBrowser.Model.Serialization;
 using MediaBrowser.Plugins.PushBulletNotifications.Configuration;
+using MediaBrowser.Model.Drawing;
+using System.IO;
 
 namespace MediaBrowser.Plugins.PushBulletNotifications
 {
@@ -45,6 +47,20 @@ namespace MediaBrowser.Plugins.PushBulletNotifications
         public override Guid Id
         {
             get { return _id; }
+        }
+
+        public Stream GetThumbImage()
+        {
+            var type = GetType();
+            return type.Assembly.GetManifestResourceStream(type.Namespace + ".thumb.jpg");
+        }
+
+        public ImageFormat ThumbImageFormat
+        {
+            get
+            {
+                return ImageFormat.Jpg;
+            }
         }
 
         public static Plugin Instance { get; private set; }
