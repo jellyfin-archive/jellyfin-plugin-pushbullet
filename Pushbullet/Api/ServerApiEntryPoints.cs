@@ -28,7 +28,7 @@ namespace Pushbullet.Api
 
         public ServerApiEndpoints(ILogger logger, IHttpClient httpClient)
         {
-              _logger = logger.GetLogger(GetType().Name);
+              _logger = logger;
               _httpClient = httpClient;
         }
         private PushBulletOptions GetOptions(String userID)
