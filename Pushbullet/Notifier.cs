@@ -17,10 +17,9 @@ namespace Pushbullet
         private readonly ILogger _logger;
         private readonly IHttpClient _httpClient;
 
-        public Notifier(ILogManager logManager, IHttpClient httpClient)
+        public Notifier(IHttpClient httpClient)
         {
-            _logger = logManager.GetLogger(GetType().Name);
-            _httpClient = httpClient;
+               _httpClient = httpClient;
         }
 
         public bool IsEnabledForUser(User user)
