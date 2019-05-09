@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,15 +6,15 @@ using System.Net;
 using System.Text;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Controller.Net;
-using MediaBrowser.Model.Logging;
+using Microsoft.Extensions.Logging;
 using MediaBrowser.Model.Services;
-using MediaBrowser.Plugins.PushBulletNotifications.Configuration;
+using Pushbullet.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediaBrowser.Plugins.PushBulletNotifications.Api
+namespace Pushbullet.Api
 {
-    [Route("/Notification/PushBullet/Test/{UserID}", "POST", Summary = "Tests PushBullet")]
+    [Route("/Notification/Pushbullet/Test/{UserID}", "POST", Summary = "Tests Pushbullet")]
     public class TestNotification : IReturnVoid
     {
         [ApiMember(Name = "UserID", Description = "User Id", IsRequired = true, DataType = "string", ParameterType = "path", Verb = "GET")]
@@ -26,12 +26,12 @@ namespace MediaBrowser.Plugins.PushBulletNotifications.Api
         private readonly IHttpClient _httpClient;
         private readonly ILogger _logger;
 
-        public ServerApiEndpoints(ILogManager logManager, IHttpClient httpClient)
+        public ServerApiEndpoints(ILogger logger, IHttpClient httpClient)
         {
-            _logger = logManager.GetLogger(GetType().Name);
-            _httpClient = httpClient;
+              _logger = logger;
+              _httpClient = httpClient;
         }
-        private PushBulletOptions GetOptions(String userID)
+        private PushbulletOptions GetOptions(String userID)
         {
             return Plugin.Instance.Configuration.Options
                 .FirstOrDefault(i => string.Equals(i.MediaBrowserUserId, userID, StringComparison.OrdinalIgnoreCase));
@@ -51,7 +51,7 @@ namespace MediaBrowser.Plugins.PushBulletNotifications.Api
             {
                 {"type", "note"},
                 {"title", "Test Notification" },
-                {"body", "This is a test notification from MediaBrowser"}
+                {"body", "This is a test notification from Jellyfin"}
             };
 
             var _httpRequest = new HttpRequestOptions();

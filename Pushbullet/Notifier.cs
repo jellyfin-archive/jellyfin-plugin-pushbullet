@@ -3,24 +3,24 @@ using System.Text;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Notifications;
-using MediaBrowser.Model.Logging;
-using MediaBrowser.Plugins.PushBulletNotifications.Configuration;
+using Microsoft.Extensions.Logging;
+using Pushbullet.Configuration;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediaBrowser.Plugins.PushBulletNotifications
+namespace Pushbullet
 {
     public class Notifier : INotificationService
     {
         private readonly ILogger _logger;
         private readonly IHttpClient _httpClient;
 
-        public Notifier(ILogManager logManager, IHttpClient httpClient)
+        public Notifier(ILogger logger, IHttpClient httpClient)
         {
-            _logger = logManager.GetLogger(GetType().Name);
-            _httpClient = httpClient;
+               _logger = logger;
+               _httpClient = httpClient;
         }
 
         public bool IsEnabledForUser(User user)
@@ -30,7 +30,7 @@ namespace MediaBrowser.Plugins.PushBulletNotifications
             return options != null && IsValid(options) && options.Enabled;
         }
 
-        private PushBulletOptions GetOptions(User user)
+        private PushbulletOptions GetOptions(User user)
         {
             return Plugin.Instance.Configuration.Options
                 .FirstOrDefault(i => string.Equals(i.MediaBrowserUserId, user.Id.ToString("N"), StringComparison.OrdinalIgnoreCase));
@@ -53,7 +53,7 @@ namespace MediaBrowser.Plugins.PushBulletNotifications
                     {"body", request.Description}
                 };
 
-            _logger.Debug("PushBullet to Token : {0} - {1} - {2}", options.Token, options.DeviceId, request.Description);
+            _logger.LogDebug("Pushbullet to Token : {0} - {1} - {2}", options.Token, options.DeviceId, request.Description);
             var _httpRequest = new HttpRequestOptions();
             string authInfo = options.Token;
             authInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(authInfo));
@@ -70,7 +70,7 @@ namespace MediaBrowser.Plugins.PushBulletNotifications
             }
         }
 
-        private bool IsValid(PushBulletOptions options)
+        private bool IsValid(PushbulletOptions options)
         {
             return !string.IsNullOrEmpty(options.Token);
         }

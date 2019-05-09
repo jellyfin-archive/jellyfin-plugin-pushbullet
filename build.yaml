@@ -1,0 +1,16 @@
+---
+name: "jellyfin-plugin-pushbullet"
+guid: "de228f12-e43e-4bd9-9fc0-2830819c3b92"
+version: "1" # Please increment with each pull request
+jellyfin_version: "10.3.0" # The earliest binary-compatible version
+nicename: "Pushbullet"
+description: "Jellyfin Pushbullet notification plugin"
+overview: >
+  Get notifications via Pushbullet.
+category: "Notifications"
+owner: "jellyfin"
+artifacts:
+  - "Pushbullet.dll"
+build_type: "dotnet"
+dotnet_configuration: "Release"
+dotnet_framework: "netstandard2.0"

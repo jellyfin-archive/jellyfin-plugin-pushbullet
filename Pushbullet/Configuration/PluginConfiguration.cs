@@ -1,20 +1,20 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using MediaBrowser.Model.Plugins;
 
-namespace MediaBrowser.Plugins.PushBulletNotifications.Configuration
+namespace Pushbullet.Configuration
 {
     public class PluginConfiguration : BasePluginConfiguration
     {
-        public PushBulletOptions[] Options { get; set; }
+        public PushbulletOptions[] Options { get; set; }
 
         public PluginConfiguration()
         {
-            Options = new PushBulletOptions[] { };
+            Options = new PushbulletOptions[] { };
         }
     }
 
-    public class PushBulletOptions
+    public class PushbulletOptions
     {
         public Boolean Enabled { get; set; }
         public String Token { get; set; }
