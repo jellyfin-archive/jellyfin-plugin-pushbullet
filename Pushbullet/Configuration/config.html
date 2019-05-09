@@ -1,24 +1,24 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>PushBullet Notifications</title>
+    <title>Pushbullet Notifications</title>
 </head>
 <body>
-    <div data-role="page" class="page type-interior pluginConfigurationPage pushBulletConfigurationPage" data-require="emby-input,emby-button,emby-checkbox,emby-select">
+    <div data-role="page" class="page type-interior pluginConfigurationPage PushbulletConfigurationPage" data-require="emby-input,emby-button,emby-checkbox,emby-select">
 
         <div data-role="content">
             <div class="content-primary">
-                <form class="pushBulletConfigurationForm">
+                <form class="PushbulletConfigurationForm">
                     <div style="height:0; overflow: hidden;"><input type="text" name="fakeusernameremembered" tabindex="-1" /><input type="password" name="fakepasswordremembered" tabindex="-1" /></div>
                     <div class="selectContainer">
-                        <select is="emby-select" id="selectUser" label="Configure PushBullet notifications for:"></select>
+                        <select is="emby-select" id="selectUser" label="Configure Pushbullet notifications for:"></select>
                     </div>
                     <label class="checkboxContainer">
-                        <input is="emby-checkbox" type="checkbox" id="chkEnablePushBullet" />
+                        <input is="emby-checkbox" type="checkbox" id="chkEnablePushbullet" />
                         <span>Enabled</span>
                     </label>
                     <div class="inputContainer">
-                        <input is="emby-input" type="text" id="txtPushBulletAuthKey" required="required" label="PushBullet auth token:" />
+                        <input is="emby-input" type="text" id="txtPushbulletAuthKey" required="required" label="Pushbullet auth token:" />
                         <div class="fieldDescription">
                             Auth key for your application
                         </div>
@@ -49,21 +49,21 @@
 
                     ApiClient.getPluginConfiguration(pluginId).then(function (config) {
 
-                        var pushBulletConfig = config.Options.filter(function (c) {
+                        var PushbulletConfig = config.Options.filter(function (c) {
 
                             return userId == c.MediaBrowserUserId;
 
                         })[0] || {};
 
-                        $('#chkEnablePushBullet', page).checked(pushBulletConfig.Enabled || false).checkboxradio("refresh");
-                        $('#txtPushBulletAuthKey', page).val(pushBulletConfig.Token || '');
-                        $('#txtPushBulletDeviceId', page).val(pushBulletConfig.DeviceId || '');
+                        $('#chkEnablePushbullet', page).checked(PushbulletConfig.Enabled || false).checkboxradio("refresh");
+                        $('#txtPushbulletAuthKey', page).val(PushbulletConfig.Token || '');
+                        $('#txtPushbulletDeviceId', page).val(PushbulletConfig.DeviceId || '');
 
                         Dashboard.hideLoadingMsg();
                     });
                 }
 
-                $('.pushBulletConfigurationPage').on('pageinit', function (event) {
+                $('.PushbulletConfigurationPage').on('pageinit', function (event) {
 
                     var page = this;
 
@@ -96,7 +96,7 @@
 
                                 ApiClient.ajax({
                                     type: "POST",
-                                    url: ApiClient.getUrl("Notification/PushBullet/Test/" + c.MediaBrowserUserId)
+                                    url: ApiClient.getUrl("Notification/Pushbullet/Test/" + c.MediaBrowserUserId)
 
                                 }).then(function () {
                                     Dashboard.hideLoadingMsg();
@@ -124,7 +124,7 @@
                     Dashboard.hideLoadingMsg();
                 });
 
-                $('.pushBulletConfigurationForm').on('submit', function (e) {
+                $('.PushbulletConfigurationForm').on('submit', function (e) {
 
                     Dashboard.showLoadingMsg();
 
@@ -134,22 +134,22 @@
 
                         var userId = $('#selectUser', form).val();
 
-                        var pushBulletConfig = config.Options.filter(function (c) {
+                        var PushbulletConfig = config.Options.filter(function (c) {
 
                             return userId == c.MediaBrowserUserId;
 
                         })[0];
 
-                        if (!pushBulletConfig) {
-                            pushBulletConfig = {};
-                            config.Options.push(pushBulletConfig);
+                        if (!PushbulletConfig) {
+                            PushbulletConfig = {};
+                            config.Options.push(PushbulletConfig);
                         }
 
-                        pushBulletConfig.MediaBrowserUserId = userId;
+                        PushbulletConfig.MediaBrowserUserId = userId;
 
-                        pushBulletConfig.Enabled = $('#chkEnablePushBullet', form).checked();
-                        pushBulletConfig.Token = $('#txtPushBulletAuthKey', form).val();
-                        pushBulletConfig.DeviceId = $('#txtPushBulletDeviceId', form).val();
+                        PushbulletConfig.Enabled = $('#chkEnablePushbullet', form).checked();
+                        PushbulletConfig.Token = $('#txtPushbulletAuthKey', form).val();
+                        PushbulletConfig.DeviceId = $('#txtPushbulletDeviceId', form).val();
 
                         ApiClient.updatePluginConfiguration(pluginId, config).then(Dashboard.processPluginConfigurationUpdateResult);
                     });

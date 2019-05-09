@@ -20,7 +20,7 @@ namespace Pushbullet
 
         public override string Name
         {
-            get { return "PushBullet Notifications"; }
+            get { return "Pushbullet Notifications"; }
         }
 
         public IEnumerable<PluginPageInfo> GetPages()
@@ -39,7 +39,7 @@ namespace Pushbullet
         {
             get
             {
-                return "Sends notifications via PushBullet Service.";
+                return "Sends notifications via Pushbullet Service.";
             }
         }
 

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Pushbullet.Api
 {
-    [Route("/Notification/PushBullet/Test/{UserID}", "POST", Summary = "Tests PushBullet")]
+    [Route("/Notification/Pushbullet/Test/{UserID}", "POST", Summary = "Tests Pushbullet")]
     public class TestNotification : IReturnVoid
     {
         [ApiMember(Name = "UserID", Description = "User Id", IsRequired = true, DataType = "string", ParameterType = "path", Verb = "GET")]
@@ -31,7 +31,7 @@ namespace Pushbullet.Api
               _logger = logger;
               _httpClient = httpClient;
         }
-        private PushBulletOptions GetOptions(String userID)
+        private PushbulletOptions GetOptions(String userID)
         {
             return Plugin.Instance.Configuration.Options
                 .FirstOrDefault(i => string.Equals(i.MediaBrowserUserId, userID, StringComparison.OrdinalIgnoreCase));
@@ -51,7 +51,7 @@ namespace Pushbullet.Api
             {
                 {"type", "note"},
                 {"title", "Test Notification" },
-                {"body", "This is a test notification from MediaBrowser"}
+                {"body", "This is a test notification from Jellyfin"}
             };
 
             var _httpRequest = new HttpRequestOptions();

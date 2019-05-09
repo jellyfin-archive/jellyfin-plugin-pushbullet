@@ -30,7 +30,7 @@ namespace Pushbullet
             return options != null && IsValid(options) && options.Enabled;
         }
 
-        private PushBulletOptions GetOptions(User user)
+        private PushbulletOptions GetOptions(User user)
         {
             return Plugin.Instance.Configuration.Options
                 .FirstOrDefault(i => string.Equals(i.MediaBrowserUserId, user.Id.ToString("N"), StringComparison.OrdinalIgnoreCase));
@@ -53,7 +53,7 @@ namespace Pushbullet
                     {"body", request.Description}
                 };
 
-            _logger.LogDebug("PushBullet to Token : {0} - {1} - {2}", options.Token, options.DeviceId, request.Description);
+            _logger.LogDebug("Pushbullet to Token : {0} - {1} - {2}", options.Token, options.DeviceId, request.Description);
             var _httpRequest = new HttpRequestOptions();
             string authInfo = options.Token;
             authInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(authInfo));
@@ -70,7 +70,7 @@ namespace Pushbullet
             }
         }
 
-        private bool IsValid(PushBulletOptions options)
+        private bool IsValid(PushbulletOptions options)
         {
             return !string.IsNullOrEmpty(options.Token);
         }
