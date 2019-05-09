@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using MediaBrowser.Model.Plugins;
 
-namespace MediaBrowser.Plugins.PushBulletNotifications.Configuration
+namespace Pushbullet.Configuration
 {
     public class PluginConfiguration : BasePluginConfiguration
     {

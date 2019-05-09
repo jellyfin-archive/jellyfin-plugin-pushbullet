@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using MediaBrowser.Common.Configuration;
 using MediaBrowser.Common.Plugins;
 using MediaBrowser.Model.Plugins;
 using MediaBrowser.Model.Serialization;
-using MediaBrowser.Plugins.PushBulletNotifications.Configuration;
+using Pushbullet.Configuration;
 using MediaBrowser.Model.Drawing;
 using System.IO;
 
-namespace MediaBrowser.Plugins.PushBulletNotifications
+namespace Pushbullet
 {
     public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages, IHasThumbImage
     {

@@ -6,13 +6,13 @@ using System.Net;
 using System.Text;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Controller.Net;
-using MediaBrowser.Model.Logging;
+using Microsoft.Extensions.Logging;
 using MediaBrowser.Model.Services;
-using MediaBrowser.Plugins.PushBulletNotifications.Configuration;
+using Pushbullet.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediaBrowser.Plugins.PushBulletNotifications.Api
+namespace Pushbullet.Api
 {
     [Route("/Notification/PushBullet/Test/{UserID}", "POST", Summary = "Tests PushBullet")]
     public class TestNotification : IReturnVoid

@@ -3,14 +3,14 @@ using System.Text;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Notifications;
-using MediaBrowser.Model.Logging;
-using MediaBrowser.Plugins.PushBulletNotifications.Configuration;
+using Microsoft.Extensions.Logging;
+using Pushbullet.Configuration;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediaBrowser.Plugins.PushBulletNotifications
+namespace Pushbullet
 {
     public class Notifier : INotificationService
     {
