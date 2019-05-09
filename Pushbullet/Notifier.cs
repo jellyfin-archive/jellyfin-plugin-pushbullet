@@ -17,8 +17,9 @@ namespace Pushbullet
         private readonly ILogger _logger;
         private readonly IHttpClient _httpClient;
 
-        public Notifier(IHttpClient httpClient)
+        public Notifier(ILogger logger, IHttpClient httpClient)
         {
+               _logger = logger;
                _httpClient = httpClient;
         }
 
