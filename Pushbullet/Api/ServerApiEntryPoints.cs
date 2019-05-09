@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,8 +26,9 @@ namespace Pushbullet.Api
         private readonly IHttpClient _httpClient;
         private readonly ILogger _logger;
 
-        public ServerApiEndpoints( IHttpClient httpClient)
+        public ServerApiEndpoints(Ilogger logger, IHttpClient httpClient)
         {
+              _logger = logger.GetLogger(GetType().Name);
               _httpClient = httpClient;
         }
         private PushBulletOptions GetOptions(String userID)
