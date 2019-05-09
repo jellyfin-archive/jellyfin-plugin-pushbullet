@@ -26,7 +26,7 @@ namespace Pushbullet.Api
         private readonly IHttpClient _httpClient;
         private readonly ILogger _logger;
 
-        public ServerApiEndpoints(Ilogger logger, IHttpClient httpClient)
+        public ServerApiEndpoints(ILogger logger, IHttpClient httpClient)
         {
               _logger = logger.GetLogger(GetType().Name);
               _httpClient = httpClient;
