@@ -52,7 +52,7 @@ namespace Pushbullet
                     {"body", request.Description}
                 };
 
-            _logger.Debug("PushBullet to Token : {0} - {1} - {2}", options.Token, options.DeviceId, request.Description);
+            _logger.LogDebug("PushBullet to Token : {0} - {1} - {2}", options.Token, options.DeviceId, request.Description);
             var _httpRequest = new HttpRequestOptions();
             string authInfo = options.Token;
             authInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(authInfo));
