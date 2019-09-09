@@ -25,7 +25,7 @@ namespace Pushbullet.Api
     class ServerApiEndpoints : IService
     {
         private readonly IHttpClient _httpClient;
-		private readonly IJsonSerializer _jsonSerializer;
+        private readonly IJsonSerializer _jsonSerializer;
         private readonly ILogger _logger;
 
         public ServerApiEndpoints(ILogger logger, IJsonSerializer jsonSerializer, IHttpClient httpClient)
