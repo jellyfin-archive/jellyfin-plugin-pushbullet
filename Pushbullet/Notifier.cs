@@ -51,6 +51,7 @@ namespace Pushbullet
             var parameters = new Dictionary<string, string>
                 {
                    // {"device_iden", options.DeviceId},
+                    {"channel_tag", options.Channel},
                     {"type", "note"},
                     {"title", request.Name},
                     {"body", request.Description}
