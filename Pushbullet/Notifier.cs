@@ -62,17 +62,17 @@ namespace Pushbullet
             authInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(authInfo));
 
             var requestOptions = new HttpRequestOptions
-			{
-						Url = "https://api.pushbullet.com/v2/pushes",
-						RequestContent = _jsonSerializer.SerializeToString(parameters),
-						BufferContent = false,
-						RequestContentType = "application/json",
-						LogErrorResponseBody = true,
-						LogRequest = true,
-						DecompressionMethod = CompressionMethod.None,
-						EnableKeepAlive = false
-			};
-			requestOptions.RequestHeaders["Authorization"] = "Basic " + authInfo;
+                {
+                    Url = "https://api.pushbullet.com/v2/pushes",
+                    RequestContent = _jsonSerializer.SerializeToString(parameters),
+                    BufferContent = false,
+                    RequestContentType = "application/json",
+                    LogErrorResponseBody = true,
+                    LogRequest = true,
+                    DecompressionMethod = CompressionMethod.None,
+                    EnableKeepAlive = false
+                };
+            requestOptions.RequestHeaders["Authorization"] = "Basic " + authInfo;
             await _httpClient.Post(requestOptions).ConfigureAwait(false);
         }
 
