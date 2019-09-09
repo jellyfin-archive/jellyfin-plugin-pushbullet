@@ -31,7 +31,7 @@ namespace Pushbullet.Api
         public ServerApiEndpoints(ILogger logger, IJsonSerializer jsonSerializer, IHttpClient httpClient)
         {
               _logger = logger;
-			  _jsonSerializer = jsonSerializer;
+              _jsonSerializer = jsonSerializer;
               _httpClient = httpClient;
         }
         private PushbulletOptions GetOptions(String userID)
