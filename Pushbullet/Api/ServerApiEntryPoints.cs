@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Controller.Net;
+using MediaBrowser.Model.Serialization;
 using Microsoft.Extensions.Logging;
 using MediaBrowser.Model.Services;
 using Pushbullet.Configuration;
@@ -24,11 +25,13 @@ namespace Pushbullet.Api
     class ServerApiEndpoints : IService
     {
         private readonly IHttpClient _httpClient;
+		private readonly IJsonSerializer _jsonSerializer;
         private readonly ILogger _logger;
 
-        public ServerApiEndpoints(ILogger logger, IHttpClient httpClient)
+        public ServerApiEndpoints(ILogger logger, IJsonSerializer jsonSerializer, IHttpClient httpClient)
         {
               _logger = logger;
+			  _jsonSerializer = jsonSerializer;
               _httpClient = httpClient;
         }
         private PushbulletOptions GetOptions(String userID)
@@ -61,16 +64,19 @@ namespace Pushbullet.Api
             string authInfo = options.Token;
             authInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(authInfo));
 
-            _httpRequest.RequestHeaders["Authorization"] = "Basic " + authInfo;
-
-            _httpRequest.Url = "https://api.pushbullet.com/v2/pushes";
-
-            _httpRequest.SetPostData(parameters);
-
-            using (await _httpClient.Post(_httpRequest).ConfigureAwait(false))
-            {
-
-            }
+            var requestOptions = new HttpRequestOptions
+			{
+						Url = "https://api.pushbullet.com/v2/pushes",
+						RequestContent = _jsonSerializer.SerializeToString(parameters),
+						BufferContent = false,
+						RequestContentType = "application/json",
+						LogErrorResponseBody = true,
+						LogRequest = true,
+						DecompressionMethod = CompressionMethod.None,
+						EnableKeepAlive = false
+			};
+			requestOptions.RequestHeaders["Authorization"] = "Basic " + authInfo;
+            await _httpClient.Post(requestOptions).ConfigureAwait(false);
         }
     }
 }
