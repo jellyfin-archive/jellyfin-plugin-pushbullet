@@ -16,10 +16,10 @@ namespace Pushbullet.Configuration
 
     public class PushbulletOptions
     {
-        public Boolean Enabled { get; set; }
-        public String Token { get; set; }
-        public String DeviceId { get; set; }
-        public String Channel { get; set; }
+        public bool Enabled { get; set; }
+        public string Token { get; set; }
+        public string DeviceId { get; set; }
+        public string Channel { get; set; }
         public string MediaBrowserUserId { get; set; }
     }
 
