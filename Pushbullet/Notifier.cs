@@ -69,7 +69,6 @@ namespace Pushbullet
                     BufferContent = false,
                     RequestContentType = "application/json",
                     LogErrorResponseBody = true,
-                    LogRequest = true,
                     DecompressionMethod = CompressionMethod.None,
                     EnableKeepAlive = false
                 };
