@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Text;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Notifications;
 using Microsoft.Extensions.Logging;
+using MediaBrowser.Model.Serialization;
 using Pushbullet.Configuration;
 using System;
 using System.Linq;
@@ -16,11 +17,13 @@ namespace Pushbullet
     {
         private readonly ILogger _logger;
         private readonly IHttpClient _httpClient;
+        private readonly IJsonSerializer _jsonSerializer;
 
-        public Notifier(ILogger logger, IHttpClient httpClient)
+        public Notifier(ILogger logger, IHttpClient httpClient, IJsonSerializer jsonSerializer)
         {
                _logger = logger;
                _httpClient = httpClient;
+               _jsonSerializer = jsonSerializer;
         }
 
         public bool IsEnabledForUser(User user)
@@ -48,26 +51,29 @@ namespace Pushbullet
             var parameters = new Dictionary<string, string>
                 {
                    // {"device_iden", options.DeviceId},
+                    {"channel_tag", options.Channel},
                     {"type", "note"},
                     {"title", request.Name},
                     {"body", request.Description}
                 };
 
             _logger.LogDebug("Pushbullet to Token : {0} - {1} - {2}", options.Token, options.DeviceId, request.Description);
-            var _httpRequest = new HttpRequestOptions();
+            
             string authInfo = options.Token;
             authInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(authInfo));
 
-            _httpRequest.RequestHeaders["Authorization"] = "Basic " + authInfo;
-
-            _httpRequest.Url = "https://api.pushbullet.com/v2/pushes";
-
-            _httpRequest.SetPostData(parameters);
-
-            using (await _httpClient.Post(_httpRequest).ConfigureAwait(false))
-            {
-
-            }
+            var requestOptions = new HttpRequestOptions
+                {
+                    Url = "https://api.pushbullet.com/v2/pushes",
+                    RequestContent = _jsonSerializer.SerializeToString(parameters),
+                    BufferContent = false,
+                    RequestContentType = "application/json",
+                    LogErrorResponseBody = true,
+                    DecompressionMethod = CompressionMethod.None,
+                    EnableKeepAlive = false
+                };
+            requestOptions.RequestHeaders["Authorization"] = "Basic " + authInfo;
+            await _httpClient.Post(requestOptions).ConfigureAwait(false);
         }
 
         private bool IsValid(PushbulletOptions options)
