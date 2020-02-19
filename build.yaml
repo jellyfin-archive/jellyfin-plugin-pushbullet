@@ -1,7 +1,7 @@
 ---
 name: "jellyfin-plugin-pushbullet"
 guid: "de228f12-e43e-4bd9-9fc0-2830819c3b92"
-version: "2" # Please increment with each pull request
+version: "3" # Please increment with each pull request
 jellyfin_version: "10.3.7" # The earliest binary-compatible version
 nicename: "Pushbullet"
 description: "Jellyfin Pushbullet notification plugin"

@@ -5,8 +5,6 @@ using MediaBrowser.Common.Plugins;
 using MediaBrowser.Model.Plugins;
 using MediaBrowser.Model.Serialization;
 using Pushbullet.Configuration;
-using MediaBrowser.Model.Drawing;
-using System.IO;
 
 namespace Pushbullet
 {
@@ -18,10 +16,7 @@ namespace Pushbullet
             Instance = this;
         }
 
-        public override string Name
-        {
-            get { return "Pushbullet Notifications"; }
-        }
+        public override string Name => "Pushbullet Notifications";
 
         public IEnumerable<PluginPageInfo> GetPages()
         {
@@ -35,19 +30,10 @@ namespace Pushbullet
             };
         }
 
-        public override string Description
-        {
-            get
-            {
-                return "Sends notifications via Pushbullet Service.";
-            }
-        }
+        public override string Description => "Sends notifications via Pushbullet Service.";
 
         private Guid _id = new Guid("de228f12-e43e-4bd9-9fc0-2830819c3b92");
-        public override Guid Id
-        {
-            get { return _id; }
-        }
+        public override Guid Id => _id;
 
         public static Plugin Instance { get; private set; }
     }

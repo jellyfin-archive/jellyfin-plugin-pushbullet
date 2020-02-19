@@ -47,18 +47,16 @@
 
             (function () {
 
-                var pluginId = "DE228F12-E43E-4BD9-9fC0-2830819C3B92";
-
+                var PushbulletPluginConfig = {
+                    uniquePluginId: "DE228F12-E43E-4BD9-9fC0-2830819C3B92" 
+                };
+                
                 function loadUserConfig(page, userId) {
-
                     Dashboard.showLoadingMsg();
-
-                    ApiClient.getPluginConfiguration(pluginId).then(function (config) {
+                    ApiClient.getPluginConfiguration(PushbulletPluginConfig.uniquePluginId).then(function (config) {
 
                         var PushbulletConfig = config.Options.filter(function (c) {
-
-                            return userId == c.MediaBrowserUserId;
-
+                            return userId === c.UserId;
                         })[0] || {};
 
                         $('#chkEnablePushbullet', page).checked(PushbulletConfig.Enabled || false).checkboxradio("refresh");
@@ -75,14 +73,11 @@
                     var page = this;
 
                     $('#selectUser', page).on('change', function () {
-
                         loadUserConfig(page, this.value);
                     });
 
                     $('#testNotification', page).on('click', function (event) {
-
                         Dashboard.showLoadingMsg();
-
                         var onError = function () {
                             alert("There was an error sending the test notification. Please check your notification settings and try again.");
                             require(['alert'], function (alert) {
@@ -90,8 +85,7 @@
                             });
                         };
 
-                        ApiClient.getPluginConfiguration(pluginId).then(function (config) {
-
+                        ApiClient.getPluginConfiguration(PushbulletPluginConfig.uniquePluginId).then(function (config) {
                             if (!config.Options.length) {
                                 Dashboard.hideLoadingMsg();
                                 require(['alert'], function (alert) {
@@ -100,10 +94,9 @@
                             }
 
                             config.Options.map(function (c) {
-
                                 ApiClient.ajax({
                                     type: "POST",
-                                    url: ApiClient.getUrl("Notification/Pushbullet/Test/" + c.MediaBrowserUserId)
+                                    url: ApiClient.getUrl("Notification/Pushbullet/Test/" + c.UserId)
 
                                 }).then(function () {
                                     Dashboard.hideLoadingMsg();
@@ -113,37 +106,24 @@
                     });
 
                 }).on('pageshow', function (event) {
-
                     Dashboard.showLoadingMsg();
-
                     var page = this;
-
                     ApiClient.getUsers().then(function (users) {
-
                         $('#selectUser', page).html(users.map(function (user) {
-
                             return '<option value="' + user.Id + '">' + user.Name + '</option>';
-
                         })).selectmenu('refresh').trigger('change');
-
                     });
 
                     Dashboard.hideLoadingMsg();
                 });
 
                 $('.PushbulletConfigurationForm').on('submit', function (e) {
-
                     Dashboard.showLoadingMsg();
-
                     var form = this;
-
-                    ApiClient.getPluginConfiguration(pluginId).then(function (config) {
-
+                    ApiClient.getPluginConfiguration(PushbulletPluginConfig.uniquePluginId).then(function (config) {
                         var userId = $('#selectUser', form).val();
-
                         var PushbulletConfig = config.Options.filter(function (c) {
-
-                            return userId == c.MediaBrowserUserId;
+                            return userId === c.UserId;
 
                         })[0];
 
@@ -152,14 +132,14 @@
                             config.Options.push(PushbulletConfig);
                         }
 
-                        PushbulletConfig.MediaBrowserUserId = userId;
+                        PushbulletConfig.UserId = userId;
 
                         PushbulletConfig.Enabled = $('#chkEnablePushbullet', form).checked();
                         PushbulletConfig.Channel = $('#txtPushbulletChannel', form).val();
                         PushbulletConfig.Token = $('#txtPushbulletAuthKey', form).val();
                         PushbulletConfig.DeviceId = $('#txtPushbulletDeviceId', form).val();
 
-                        ApiClient.updatePluginConfiguration(pluginId, config).then(Dashboard.processPluginConfigurationUpdateResult);
+                        ApiClient.updatePluginConfiguration(PushbulletPluginConfig.uniquePluginId, config).then(Dashboard.processPluginConfigurationUpdateResult);
                     });
 
                     return false;
