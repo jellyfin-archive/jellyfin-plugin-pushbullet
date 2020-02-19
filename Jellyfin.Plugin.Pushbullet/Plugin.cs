@@ -20,7 +20,7 @@ namespace Jellyfin.Plugin.Pushbullet
 
         public override string Name
         {
-            get { return "Pushbullet Notifications"; }
+            get { return "Pushbullet"; }
         }
 
         public IEnumerable<PluginPageInfo> GetPages()
