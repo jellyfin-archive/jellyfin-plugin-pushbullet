@@ -9,7 +9,7 @@ This plugin can be used for sending notifications to a range of personal devices
 
 1. Clone this repository
 2. Ensure you have .NET Core SDK set up and installed
-3. Build the plugin with following command:
+3. Build the plugin with your favorite IDE or the `dotnet` command.
 
 ```
 dotnet publish --configuration Release --output bin
