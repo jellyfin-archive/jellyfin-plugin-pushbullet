@@ -15,7 +15,7 @@ This plugin can be used for sending notifications to a range of personal devices
 dotnet publish --configuration Release --output bin
 ```
 
-4. Place the resulting `Jellyfin.Plugin.Pushbullet.dll` file in a folder called `plugins/` inside your Jellyfin installation / data directory.
+4. Place the resulting `Jellyfin.Plugin.Pushbullet.dll` file in a folder called `plugins/` inside your Jellyfin data directory.
 
 ### Screenshot
 
