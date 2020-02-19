@@ -3,7 +3,7 @@
 
 ## About
 
-The Jellyfin Pushbullet plugin can be used for sending notifications to a range of personal devices via <a href="https://www.pushbullet.com/">Pushbullet.</a>
+This plugin can be used for sending notifications to a range of personal devices via <a href="https://www.pushbullet.com/">Pushbullet</a>.
 
 ## Build & Installation Process
 
