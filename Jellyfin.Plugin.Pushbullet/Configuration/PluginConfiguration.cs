@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using MediaBrowser.Model.Plugins;
 
-namespace Pushbullet.Configuration
+namespace Jellyfin.Plugin.Pushbullet.Configuration
 {
     public class PluginConfiguration : BasePluginConfiguration
     {

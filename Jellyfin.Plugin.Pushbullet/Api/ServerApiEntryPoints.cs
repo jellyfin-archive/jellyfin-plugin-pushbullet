@@ -9,11 +9,11 @@ using MediaBrowser.Controller.Net;
 using MediaBrowser.Model.Serialization;
 using Microsoft.Extensions.Logging;
 using MediaBrowser.Model.Services;
-using Pushbullet.Configuration;
+using Jellyfin.Plugin.Pushbullet.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Pushbullet.Api
+namespace Jellyfin.Plugin.Pushbullet.Api
 {
     [Route("/Notification/Pushbullet/Test/{UserID}", "POST", Summary = "Tests Pushbullet")]
     public class TestNotification : IReturnVoid

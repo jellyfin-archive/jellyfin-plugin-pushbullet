@@ -4,11 +4,11 @@ using MediaBrowser.Common.Configuration;
 using MediaBrowser.Common.Plugins;
 using MediaBrowser.Model.Plugins;
 using MediaBrowser.Model.Serialization;
-using Pushbullet.Configuration;
+using Jellyfin.Plugin.Pushbullet.Configuration;
 using MediaBrowser.Model.Drawing;
 using System.IO;
 
-namespace Pushbullet
+namespace Jellyfin.Plugin.Pushbullet
 {
     public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
     {
