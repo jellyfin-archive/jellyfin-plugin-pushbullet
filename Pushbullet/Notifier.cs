@@ -5,13 +5,13 @@ using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Notifications;
 using Microsoft.Extensions.Logging;
 using MediaBrowser.Model.Serialization;
-using Jellyfin.Plugin.Pushbullet.Configuration;
+using Pushbullet.Configuration;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Jellyfin.Plugin.Pushbullet
+namespace Pushbullet
 {
     public class Notifier : INotificationService
     {
