@@ -1,7 +1,7 @@
 ---
 name: "jellyfin-plugin-pushbullet"
 guid: "de228f12-e43e-4bd9-9fc0-2830819c3b92"
-version: "3"
+version: "4"
 jellyfin_version: "10.5.0"
 nicename: "Pushbullet"
 description: "Jellyfin Pushbullet notification plugin"
