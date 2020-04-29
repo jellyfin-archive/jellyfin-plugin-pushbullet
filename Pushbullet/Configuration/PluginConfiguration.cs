@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
 using MediaBrowser.Model.Plugins;
 
 namespace Pushbullet.Configuration
 {
     public class PluginConfiguration : BasePluginConfiguration
     {
+        public const string Url = "https://api.pushbullet.com/v2/pushes";
+        
         public PushbulletOptions[] Options { get; set; }
 
         public PluginConfiguration()
@@ -20,7 +20,7 @@ namespace Pushbullet.Configuration
         public string Token { get; set; }
         public string DeviceId { get; set; }
         public string Channel { get; set; }
-        public string MediaBrowserUserId { get; set; }
+        public string UserId { get; set; }
     }
 
 }
