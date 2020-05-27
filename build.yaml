@@ -1,16 +1,14 @@
 ---
-name: "jellyfin-plugin-pushbullet"
+name: "Pushbullet"
 guid: "de228f12-e43e-4bd9-9fc0-2830819c3b92"
-version: "4"
-jellyfin_version: "10.5.0"
-nicename: "Pushbullet"
-description: "Jellyfin Pushbullet notification plugin"
-overview: >
+version: "4.0.0.0"
+targetAbi: "10.5.0.0"
+overview: "Pushbullet notification plugin"
+description: >
   Get notifications via Pushbullet.
 category: "Notifications"
 owner: "jellyfin"
 artifacts:
-  - "Pushbullet.dll"
-build_type: "dotnet"
-dotnet_configuration: "Release"
-dotnet_framework: "netstandard2.1"
+- "Pushbullet.dll"
+changelog: >
+  changelog

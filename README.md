@@ -1,1 +1,1 @@
-# Pushbullet
+# jellyfin-plugin-pushbullet
