@@ -8,16 +8,39 @@ using Pushbullet.Configuration;
 
 namespace Pushbullet
 {
+    /// <summary>
+    /// Plugin with configuration and webpages.
+    /// </summary>
     public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
     {
+        private readonly Guid _id = new Guid("de228f12-e43e-4bd9-9fc0-2830819c3b92");
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Plugin"/> class.
+        /// </summary>
+        /// <param name="applicationPaths">Instance of the <see cref="IApplicationPaths"/> interface.</param>
+        /// <param name="xmlSerializer">Instance of the <see cref="IXmlSerializer"/> interface.</param>
         public Plugin(IApplicationPaths applicationPaths, IXmlSerializer xmlSerializer)
             : base(applicationPaths, xmlSerializer)
         {
             Instance = this;
         }
 
+        /// <inheritdoc />
         public override string Name => "Pushbullet Notifications";
 
+        /// <inheritdoc />
+        public override string Description => "Sends notifications via Pushbullet Service.";
+
+        /// <inheritdoc />
+        public override Guid Id => _id;
+
+        /// <summary>
+        /// Gets plugin instance.
+        /// </summary>
+        public static Plugin? Instance { get; private set; }
+
+        /// <inheritdoc />
         public IEnumerable<PluginPageInfo> GetPages()
         {
             return new[]
@@ -29,12 +52,5 @@ namespace Pushbullet
                 }
             };
         }
-
-        public override string Description => "Sends notifications via Pushbullet Service.";
-
-        private Guid _id = new Guid("de228f12-e43e-4bd9-9fc0-2830819c3b92");
-        public override Guid Id => _id;
-
-        public static Plugin Instance { get; private set; }
     }
 }
