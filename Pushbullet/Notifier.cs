@@ -14,11 +14,11 @@ namespace Pushbullet
 {
     public class Notifier : INotificationService
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<Notifier> _logger;
         private readonly IHttpClient _httpClient;
         private readonly IJsonSerializer _jsonSerializer;
 
-        public Notifier(ILogger logger, IHttpClient httpClient, IJsonSerializer jsonSerializer)
+        public Notifier(ILogger<Notifier> logger, IHttpClient httpClient, IJsonSerializer jsonSerializer)
         {
                _logger = logger;
                _httpClient = httpClient;
