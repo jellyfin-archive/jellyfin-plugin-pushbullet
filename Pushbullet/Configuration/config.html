@@ -54,7 +54,7 @@
                             return userId === c.UserId;
                         })[0] || {};
 
-                        $('#chkEnablePushbullet', page).checked = PushbulletConfig.Enabled || false;
+                        document.getElementById('chkEnablePushbullet').checked = PushbulletConfig.Enabled || false;
                         $('#txtPushbulletChannel', page).val(PushbulletConfig.Channel || '');
                         $('#txtPushbulletAuthKey', page).val(PushbulletConfig.Token || '');
                         $('#txtPushbulletDeviceId', page).val(PushbulletConfig.DeviceId || '');
@@ -125,7 +125,7 @@
                         }
 
                         PushbulletConfig.UserId = userId;
-                        PushbulletConfig.Enabled = $('#chkEnablePushbullet', form).checked;
+                        PushbulletConfig.Enabled = document.getElementById('chkEnablePushbullet').checked;
                         PushbulletConfig.Channel = $('#txtPushbulletChannel', form).val();
                         PushbulletConfig.Token = $('#txtPushbulletAuthKey', form).val();
                         PushbulletConfig.DeviceId = $('#txtPushbulletDeviceId', form).val();
