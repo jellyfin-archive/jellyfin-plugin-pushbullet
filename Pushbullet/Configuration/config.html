@@ -101,9 +101,9 @@
                     Dashboard.showLoadingMsg();
                     var page = this;
                     ApiClient.getUsers().then(function (users) {
-                        $('#selectUser', page).html(users.map(function (user) {
+                        document.getElementById('#selectUser').innerHTML = users.map(function (user) {
                             return '<option value="' + user.Id + '">' + user.Name + '</option>';
-                        })).selectmenu('refresh').trigger('change');
+                        });
                     });
 
                     Dashboard.hideLoadingMsg();
