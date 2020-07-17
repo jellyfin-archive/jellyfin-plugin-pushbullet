@@ -4,8 +4,8 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Jellyfin.Data.Entities;
 using MediaBrowser.Common.Net;
-using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Notifications;
 using MediaBrowser.Model.Serialization;
 using Microsoft.Extensions.Logging;
@@ -79,7 +79,7 @@ namespace Pushbullet
             await _httpClient.Post(requestOptions).ConfigureAwait(false);
         }
 
-        private static PushbulletOptions GetOptions(BaseItem user)
+        private static PushbulletOptions GetOptions(User user)
         {
             return Plugin.Instance!.Configuration.GetOptions()
                 .FirstOrDefault(i =>
