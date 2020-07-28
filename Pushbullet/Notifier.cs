@@ -81,7 +81,7 @@ namespace Pushbullet
 
         private static PushbulletOptions GetOptions(User user)
         {
-            return Plugin.Instance!.Configuration.GetOptions()
+            return Plugin.Instance!.Configuration.Options
                 .FirstOrDefault(i =>
                     string.Equals(i.UserId, user.Id.ToString("N", CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase));
         }
