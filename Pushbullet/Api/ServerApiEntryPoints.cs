@@ -30,7 +30,7 @@ namespace Pushbullet.Api
 
         private static PushbulletOptions GetOptions(string userId)
         {
-            return Plugin.Instance!.Configuration.GetOptions()
+            return Plugin.Instance!.Configuration.Options
                 .FirstOrDefault(i => string.Equals(i.UserId, userId, StringComparison.OrdinalIgnoreCase));
         }
 
