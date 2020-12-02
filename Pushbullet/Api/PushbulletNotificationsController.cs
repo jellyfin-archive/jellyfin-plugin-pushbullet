@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Mime;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using MediaBrowser.Common.Json;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Serialization;
 using Microsoft.AspNetCore.Http;
@@ -19,18 +23,20 @@ namespace Pushbullet.Api
     [Produces(MediaTypeNames.Application.Json)]
     public class PushbulletNotificationsController : ControllerBase
     {
-        private readonly IHttpClient _httpClient;
+        private readonly IHttpClientFactory _httpClientFactory;
         private readonly IJsonSerializer _jsonSerializer;
+        private readonly JsonSerializerOptions _jsonSerializerOptions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushbulletNotificationsController"/> class.
         /// </summary>
         /// <param name="jsonSerializer">Instance of the <see cref="IJsonSerializer"/> interface.</param>
-        /// <param name="httpClient">Instance of the <see cref="IHttpClient"/> interface.</param>
-        public PushbulletNotificationsController(IJsonSerializer jsonSerializer, IHttpClient httpClient)
+        /// <param name="httpClientFactory">Instance of the <see cref="IHttpClientFactory"/> interface.</param>
+        public PushbulletNotificationsController(IJsonSerializer jsonSerializer, IHttpClientFactory httpClientFactory)
         {
             _jsonSerializer = jsonSerializer;
-            _httpClient = httpClient;
+            _httpClientFactory = httpClientFactory;
+            _jsonSerializerOptions = JsonDefaults.GetOptions();
         }
 
         /// <summary>
@@ -43,8 +49,12 @@ namespace Pushbullet.Api
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult> PostAsync([FromRoute] string userId)
         {
-            var options = Plugin.Instance!.Configuration.GetOptions()
+            var options = Plugin.Instance?.Configuration.GetOptions()
                 .FirstOrDefault(i => string.Equals(i.UserId, userId, StringComparison.OrdinalIgnoreCase));
+            if (options == null)
+            {
+                return BadRequest("Options are null");
+            }
 
             var parameters = new Dictionary<string, string>
             {
@@ -53,17 +63,14 @@ namespace Pushbullet.Api
                 { "body", "This is a test notification from Jellyfin" }
             };
 
-            var requestOptions = new HttpRequestOptions
-            {
-                Url = PluginConfiguration.Url,
-                RequestContent = _jsonSerializer.SerializeToString(parameters),
-                RequestContentType = "application/json",
-                LogErrorResponseBody = true,
-                RequestHeaders = { ["Access-Token"] = options.Token }
-            };
-
-            await _httpClient.Post(requestOptions).ConfigureAwait(false);
-
+            var httpClient = _httpClientFactory.CreateClient(NamedClient.Default);
+            using var requestMessage = new HttpRequestMessage(HttpMethod.Post, PluginConfiguration.Url);
+            requestMessage.Content = new StringContent(
+                JsonSerializer.Serialize(parameters, _jsonSerializerOptions),
+                Encoding.UTF8,
+                MediaTypeNames.Application.Json);
+            requestMessage.Headers.TryAddWithoutValidation("Access-Token", options.Token);
+            using var responseMessage = await httpClient.SendAsync(requestMessage).ConfigureAwait(false);
             return NoContent();
         }
     }
