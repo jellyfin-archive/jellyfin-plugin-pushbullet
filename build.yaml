@@ -2,7 +2,8 @@
 name: "Pushbullet"
 guid: "de228f12-e43e-4bd9-9fc0-2830819c3b92"
 version: "5.0.0.0"
-targetAbi: "10.6.0.0"
+targetAbi: "10.7.0.0"
+framework: "net5.0"
 overview: "Pushbullet notification plugin"
 description: >
   Get notifications via Pushbullet.
