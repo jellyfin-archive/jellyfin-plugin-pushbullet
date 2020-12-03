@@ -24,17 +24,14 @@ namespace Pushbullet.Api
     public class PushbulletNotificationsController : ControllerBase
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IJsonSerializer _jsonSerializer;
         private readonly JsonSerializerOptions _jsonSerializerOptions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushbulletNotificationsController"/> class.
         /// </summary>
-        /// <param name="jsonSerializer">Instance of the <see cref="IJsonSerializer"/> interface.</param>
         /// <param name="httpClientFactory">Instance of the <see cref="IHttpClientFactory"/> interface.</param>
-        public PushbulletNotificationsController(IJsonSerializer jsonSerializer, IHttpClientFactory httpClientFactory)
+        public PushbulletNotificationsController(IHttpClientFactory httpClientFactory)
         {
-            _jsonSerializer = jsonSerializer;
             _httpClientFactory = httpClientFactory;
             _jsonSerializerOptions = JsonDefaults.GetOptions();
         }
@@ -49,7 +46,7 @@ namespace Pushbullet.Api
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult> PostAsync([FromRoute] string userId)
         {
-            var options = Plugin.Instance?.Configuration.GetOptions()
+            var options = Plugin.Instance?.Configuration.Options
                 .FirstOrDefault(i => string.Equals(i.UserId, userId, StringComparison.OrdinalIgnoreCase));
             if (options == null)
             {

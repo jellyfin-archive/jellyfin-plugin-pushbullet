@@ -88,7 +88,7 @@ namespace Pushbullet
 
         private static PushbulletOptions? GetOptions(User user)
         {
-            return Plugin.Instance?.Configuration.GetOptions()
+            return Plugin.Instance?.Configuration.Options
                 .FirstOrDefault(i => Guid.Parse(i.UserId) == user.Id);
         }
 
