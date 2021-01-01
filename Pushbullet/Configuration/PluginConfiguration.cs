@@ -15,9 +15,9 @@ namespace Pushbullet.Configuration
         public const string Url = "https://api.pushbullet.com/v2/pushes";
 
         /// <summary>
-        /// Get configured options.
+        /// Gets or sets the configured options.
         /// </summary>
         /// <returns><see cref="IEnumerable{PushbulletOptions}"/>.</returns>
-        public IReadOnlyList<PushbulletOptions> Options { get; set; } = Array.Empty<PushbulletOptions>();
+        public PushbulletOptions[] Options { get; set; } = Array.Empty<PushbulletOptions>();
     }
 }
