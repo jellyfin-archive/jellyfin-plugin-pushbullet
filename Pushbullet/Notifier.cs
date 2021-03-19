@@ -83,7 +83,7 @@ namespace Pushbullet
                 Encoding.UTF8,
                 MediaTypeNames.Application.Json);
             requestMessage.Headers.TryAddWithoutValidation("Access-Token", options.Token);
-            using var responseMessage = await httpClient.SendAsync(requestMessage).ConfigureAwait(false);
+            using var responseMessage = await httpClient.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
         }
 
         private static PushbulletOptions? GetOptions(User user)
