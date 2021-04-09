@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MediaBrowser.Model.Plugins;
 
 namespace Pushbullet.Configuration
@@ -18,6 +19,7 @@ namespace Pushbullet.Configuration
         /// Gets or sets the configured options.
         /// </summary>
         /// <returns><see cref="IEnumerable{PushbulletOptions}"/>.</returns>
+        [SuppressMessage("Microsoft.Maintainability", "CA1819: Properties should not return arrays", Justification = "XML serializer support")]
         public PushbulletOptions[] Options { get; set; } = Array.Empty<PushbulletOptions>();
     }
 }
