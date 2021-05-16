@@ -1,0 +1,42 @@
+<div id="PushbulletConfigurationPage" data-role="page" class="page type-interior pluginConfigurationPage" data-controller="__plugin/pushbulletnotificationsjs">
+    <div data-role="content">
+        <div class="content-primary">
+            <form class="PushbulletConfigurationForm">
+                <div style="height:0; overflow: hidden;">
+                    <input type="text" name="fakeusernameremembered" tabindex="-1" />
+                    <input type="password" name="fakepasswordremembered" tabindex="-1" />
+                </div>
+                <div class="selectContainer">
+                    <select is="emby-select" id="selectUser" label="Configure Pushbullet notifications for:"></select>
+                </div>
+                <label class="checkboxContainer">
+                    <input is="emby-checkbox" type="checkbox" id="chkEnablePushbullet" />
+                    <span>Enabled</span>
+                </label>
+                <div class="inputContainer">
+                    <input is="emby-input" type="text" id="txtPushbulletChannel" label="Pushbullet channel:" />
+                    <div class="fieldDescription">
+                        Pushbullet channel
+                    </div>
+                </div>
+                <div class="inputContainer">
+                    <input is="emby-input" type="text" id="txtPushbulletAuthKey" required="required" label="Pushbullet auth token:" />
+                    <div class="fieldDescription">
+                        Auth key for your application
+                    </div>
+                </div>
+                <div>
+                    <button is="emby-button" type="button" id="testNotification" class="raised button-cancel block" >
+                        <span>Test Notification</span>
+                    </button>
+                </div>
+                <br />
+                <div>
+                    <button is="emby-button" type="submit" class="raised button-submit block">
+                        <span>${Save}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -13,8 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Configuration\config.html" />
-    <EmbeddedResource Include="Configuration\config.html" />
+    <None Remove="Web\pushbulletnotifications.html" />
+    <None Remove="Web\pushbulletnotifications.js" />
+    <EmbeddedResource Include="Web\pushbulletnotifications.html" />
+    <EmbeddedResource Include="Web\pushbulletnotifications.js" />
   </ItemGroup>
 
   <!-- Code Analyzers-->

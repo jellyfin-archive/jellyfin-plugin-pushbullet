@@ -47,8 +47,13 @@ namespace Pushbullet
             {
                 new PluginPageInfo
                 {
-                    Name = Name,
-                    EmbeddedResourcePath = GetType().Namespace + ".Configuration.config.html"
+                    Name = "pushbulletnotifications",
+                    EmbeddedResourcePath = GetType().Namespace + ".Web.pushbulletnotifications.html",
+                },
+                new PluginPageInfo
+                {
+                    Name = "pushbulletnotificationsjs",
+                    EmbeddedResourcePath = GetType().Namespace + ".Web.pushbulletnotifications.js"
                 }
             };
         }
