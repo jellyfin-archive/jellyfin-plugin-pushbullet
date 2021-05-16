@@ -16,12 +16,6 @@
         public string Token { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the device id.
-        /// Unused.
-        /// </summary>
-        public string? DeviceId { get; set; }
-
-        /// <summary>
         /// Gets or sets the channel.
         /// Unused.
         /// </summary>

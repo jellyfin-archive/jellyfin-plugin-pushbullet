@@ -73,7 +73,6 @@ namespace Pushbullet
             _logger.LogDebug(
                 "Pushbullet to Token : {0} - {1} - {2}",
                 options.Token,
-                options.DeviceId,
                 request.Description);
 
             var httpClient = _httpClientFactory.CreateClient(NamedClient.Default);

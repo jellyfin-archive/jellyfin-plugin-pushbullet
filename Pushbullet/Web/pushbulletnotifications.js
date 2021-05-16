@@ -11,7 +11,6 @@ function loadUserConfig(page, userId) {
         page.querySelector('#chkEnablePushbullet').checked = PushbulletConfig.Enabled || false;
         page.querySelector('#txtPushbulletChannel').value = PushbulletConfig.Channel || '';
         page.querySelector('#txtPushbulletAuthKey').value = PushbulletConfig.Token || '';
-        page.querySelector('#txtPushbulletDeviceId').value = PushbulletConfig.DeviceId || '';
 
         Dashboard.hideLoadingMsg();
     });
@@ -81,7 +80,6 @@ export default function (view) {
             PushbulletConfig.Enabled = form.querySelector('#chkEnablePushbullet').checked;
             PushbulletConfig.Channel = form.querySelector('#txtPushbulletChannel').value;
             PushbulletConfig.Token = form.querySelector('#txtPushbulletAuthKey').value;
-            PushbulletConfig.DeviceId = form.querySelector('#txtPushbulletDeviceId').value;
 
             ApiClient.updatePluginConfiguration(PushbulletPluginConfig.uniquePluginId, config).then(function (result) {
                 Dashboard.processPluginConfigurationUpdateResult(result);
