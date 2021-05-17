@@ -71,7 +71,7 @@ namespace Pushbullet
             }
 
             _logger.LogDebug(
-                "Pushbullet to Token : {0} - {1} - {2}",
+                "Pushbullet to Token : {0} - {1}",
                 options.Token,
                 request.Description);
 
