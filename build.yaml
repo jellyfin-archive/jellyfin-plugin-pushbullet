@@ -1,6 +1,7 @@
 ---
 name: "Pushbullet"
 guid: "de228f12-e43e-4bd9-9fc0-2830819c3b92"
+imageUrl: "https://repo.jellyfin.org/releases/plugin/images/jellyfin-plugin-pushbullet.png"
 version: "7.0.0.0"
 targetAbi: "10.7.0.0"
 framework: "net5.0"
@@ -10,6 +11,6 @@ description: >
 category: "Notifications"
 owner: "jellyfin"
 artifacts:
-- "Pushbullet.dll"
-changelog: >
+  - "Pushbullet.dll"
+changelog: |
   changelog
